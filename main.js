@@ -8,27 +8,38 @@ import AuthScreen from './src/screens/AuthScreen';
 import DeckResultsScreen from './src/screens/DeckResultsScreen';
 import MapSearchScreen from './src/screens/MapSearchScreen';
 import ReviewSavedScreen from './src/screens/ReviewSavedScreen';
+import SettingsScreen from './src/screens/SettingsScreen';
 
 class App extends Component {
   render() {
-    const MainNavigator = TabNavigator({
+    const mainOptions = {
+      navigationOptions: {
+        tabBarVisible: true
+      },
+      Lazy: true
+    }
+
+    const AppNavigation = TabNavigator({
+      mapSearch: { screen: MapSearchScreen},
+      searchResults: { screen: DeckResultsScreen },
+      review: { 
+        screen: StackNavigator({
+          review: { screen: ReviewSavedScreen },
+          settings: { screen: SettingsScreen }
+        })
+      }
+    })
+
+    const MainNavigation = TabNavigator({
       welcome: { screen: WelcomeScreen },
-      auth: { screen: AuthScreen }
-
-    }, 
-
- {
-  navigationOptions: {
-    tabBarVisible: true,
-  },
-  Lazy: true
-
-} 
-
-  );
+      auth: { screen: AuthScreen },
+      app: { screen: AppNavigation }
+      }
+    )
     return (
-        <MainNavigator />
-    
+      <View style={styles.container}>
+        <MainNavigation />
+      </View>
     );
   }
 }
@@ -37,7 +48,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    alignItems: 'center',
     justifyContent: 'center',
   },
 });
