@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ScrollView, View, Text } from 'react-native';
+import { ScrollView, View, Text, Dimensions } from 'react-native';
 
 const slideText = [
   { text: 'Lorem ipsum dolor sit amet', color: '#009688' },
@@ -7,14 +7,17 @@ const slideText = [
   { text: 'Cetero vituperatoribus no quo', color: '#009688' }
 ];
 
+const SCREEN_WIDTH = Dimensions.get('window').width;
+
 class WelcomeScreen extends Component {
   renderSlides() {
     return slideText.map(slide => {
       return (
         <View
+          style={[styles.slideStyle, { backgroundColor: slide.color }]}
           key={slide.text}
         >
-          <Text>{slide.text}</Text>
+          <Text style={styles.textStyle}>{slide.text}</Text>
         </View>
       );
     });
@@ -31,6 +34,21 @@ class WelcomeScreen extends Component {
         {this.renderSlides()}
       </ScrollView>
     );  
+  }
+}
+
+const styles = {
+  slideStyle: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: SCREEN_WIDTH
+  },
+
+  textStyle: {
+    fontSize: 30,
+    textAlign: 'center'
+    
   }
 }
 
