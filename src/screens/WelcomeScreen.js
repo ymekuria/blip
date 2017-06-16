@@ -1,15 +1,35 @@
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
+import { ScrollView, View, Text } from 'react-native';
+
+const slideText = [
+  { text: 'Lorem ipsum dolor sit amet', color: '#009688' },
+  { text: 'Accusamus complectitur sit cu', color: '#009688' },
+  { text: 'Cetero vituperatoribus no quo', color: '#009688' }
+];
 
 class WelcomeScreen extends Component {
+  renderSlides() {
+    return slideText.map(slide => {
+      return (
+        <View
+          key={slide.text}
+        >
+          <Text>{slide.text}</Text>
+        </View>
+      );
+    });
+  }
+
   render() {
+
     return (
-      <View> 
-        <Text>WelcomeScreen</Text>
-        <Text>WelcomeScreen</Text>
-        <Text>WelcomeScreen</Text>
-        <Text>WelcomeScreen</Text> 
-      </View>
+      <ScrollView
+        horizontal
+        pagingEnabled
+        style={{ flex: 1 }}
+      > 
+        {this.renderSlides()}
+      </ScrollView>
     );  
   }
 }
