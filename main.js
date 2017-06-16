@@ -12,14 +12,22 @@ import SettingsScreen from './src/screens/SettingsScreen';
 
 class App extends Component {
   render() {
-    const mainOptions = {
+    // Lazy option prevents the navigator from rendering all the screens initially
+    const mainNavOptions = {
       navigationOptions: {
         tabBarVisible: true
       },
       Lazy: true
     }
 
-    const AppNavigation = TabNavigator({
+    const appNavOptions = {
+      tabBarPosition: 'bottom',
+      tabBarOptions: {
+        fontSize: 12
+      }
+    }
+
+    const appNavigation = TabNavigator({
       mapSearch: { screen: MapSearchScreen},
       searchResults: { screen: DeckResultsScreen },
       review: { 
@@ -28,14 +36,14 @@ class App extends Component {
           settings: { screen: SettingsScreen }
         })
       }
-    })
+    }, appNavOptions);
 
     const MainNavigation = TabNavigator({
       welcome: { screen: WelcomeScreen },
       auth: { screen: AuthScreen },
-      app: { screen: AppNavigation }
-      }
-    )
+      app: { screen: appNavigation }
+    }, mainNavOptions);
+    
     return (
       <View style={styles.container}>
         <MainNavigation />
