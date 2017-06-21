@@ -2,7 +2,9 @@ import Expo from 'expo';
 import React, { Component } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { TabNavigator, StackNavigator } from 'react-navigation'
+import { Provider } from 'react-redux';
 
+import Store from 
 import WelcomeScreen from './src/screens/WelcomeScreen';
 import AuthScreen from './src/screens/AuthScreen';
 import DeckResultsScreen from './src/screens/DeckResultsScreen';
@@ -17,7 +19,7 @@ class App extends Component {
       navigationOptions: {
         tabBarVisible: true
       },
-      Lazy: true
+      lazy: true
     }
 
     const appNavOptions = {

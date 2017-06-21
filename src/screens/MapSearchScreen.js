@@ -13,24 +13,26 @@ class MapSearchScreen extends Component {
     }
   }
   componentDidMount() {
+    console.log('in compmount')
     // getting the current location of the device to show initial map region
     navigator.geolocation.getCurrentPosition(position => {
-        // const { latitude, longitude } = position.coords;
-        const region = {
-          latitude: position.cords.latitude,
-          longitude: position.cords.longitude,
-          latitudeDelta: .05,
-          longitudeDelta: .1
-        };
-
-        this.setState({ region });
-      },
-      (error) => console.log(error),
-      { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 },
-    ); 
+      const region = {
+        latitude: position.coords.latitude,
+        longitude: position.coords.longitude,
+        latitudeDelta: .05,
+        longitudeDelta: .1
+      };
+      console.log('current position: ', region);
+      this.setState({ region });
+      console.log('state after lookup: ',this.state);
+    },
+    (error) => console.log(error),
+    { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 },
+  ); 
 
   }
   render() {
+    console.log('this.state in render mehtod: ', this.state)
     return (
       <MapView
         style={{ flex: 1 }}
