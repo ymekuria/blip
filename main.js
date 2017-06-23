@@ -47,11 +47,10 @@ class App extends Component {
     }, mainNavOptions);
     
     return (
-      <View style={styles.container}>
-        <Provider store={store}>
-          <MainNavigation />
-        </Provider>  
-      </View>
+      <Provider store={store}>
+        <MainNavigation />
+      </Provider>  
+     
     );
   }
 }
