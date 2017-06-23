@@ -1,4 +1,6 @@
 node_modules/**/*
 .expo/*
 npm-debug.*
-/config
+
+## API Keys
+env/config.js

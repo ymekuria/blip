@@ -17,6 +17,7 @@ class WelcomeSlides extends Component {
       );
     });
   }
+  
 
   render() {
     return (
