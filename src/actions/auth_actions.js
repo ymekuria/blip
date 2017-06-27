@@ -24,6 +24,12 @@ const performFbLogin = async dispatch => {
 	let { token, type } = await Facebook.logInWithReadPermissionsAsync(FACEBOOK_APP_ID, {
 		permissions: ['public_profile']
 	});
-	console.log('login', login);
-	return dispatch({ type: 'FACEBOOK_LOGIN' })
+
+	if (type === 'cancel' ) {
+		return dispatch({ type: FACEBOOK_LOGIN_FAIL });
+	} 
+	
+	// saving the fb_token on the users device for future authentication
+	await AsyncStorage.setItem('fb_token', token);
+	return dispatch({ type: 'FACEBOOK_LOGIN_SUCCESS', payload: token })
 }
