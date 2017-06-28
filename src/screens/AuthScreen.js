@@ -10,6 +10,15 @@ class AuthScreen extends Component {
 
 
   }
+
+  // navigating the user to the map search screen if a token is created from FB Auth
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.token) {
+      this.props.navigation.navigate('mapSearch');
+    }
+  }
+
+  comp
   render() {
     return (
       <View> 
@@ -22,5 +31,9 @@ class AuthScreen extends Component {
   }
 }
 
-export default  connect(null, actions)(AuthScreen);
+function mapStateToProps(state) {
+  return { token: state.auth.token }
+}
+
+export default  connect(mapStateToProps, actions)(AuthScreen);
 
