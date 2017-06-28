@@ -1,8 +1,6 @@
 import { combineReducers } from 'redux';
-import placeholder from './placeholder_reducer';
+import auth from './auth_reducer';
 
-
-// TODO: replace placeholder reducer
 export default combineReducers({
-  placeholder
+  auth
 });
