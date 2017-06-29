@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text } from 'react-native';
-import { MapView } from 'expo'
+import { MapView } from 'expo';
+import { Button, Icon, Card } from 'react-native-elements';
 
 class MapSearchScreen extends Component {
   // setting initial map region to San Francisco
@@ -32,12 +33,19 @@ class MapSearchScreen extends Component {
 
   }
   render() {
-    console.log('this.state in render mehtod: ', this.state)
+    console.log(`this.state in render method: `, this.state);
     return (
-      <MapView
-        style={{ flex: 1 }}
-        initialRegion={this.state.region}
-      />
+      <View style={{ flex: 1 }}>
+
+        <MapView
+          style={{ flex: 1 }}
+          initialRegion={this.state.region}
+        />
+        <Button 
+          title="Search This Area"
+          backgroundColor="#009688"
+        />
+      </View>
     );
   }
 }

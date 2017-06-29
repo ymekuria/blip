@@ -7,8 +7,6 @@ class AuthScreen extends Component {
   componentDidMount() {
     console.log(this.props)
     this.props.facebookLogin();
-
-
   }
 
   // navigating the user to the map search screen if a token is created from FB Auth
@@ -18,14 +16,9 @@ class AuthScreen extends Component {
     }
   }
 
-  comp
   render() {
     return (
       <View> 
-        <Text>AuthScreen</Text>
-        <Text>AuthScreen</Text>
-        <Text>AuthScreen</Text>
-        <Text>AuthScreen</Text> 
       </View>
     );  
   }
