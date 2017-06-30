@@ -9,13 +9,17 @@ import {
 
 // using redux thunk for async actions 
 export const facebookLogin = () => async dispatch => {
-	// first checking if a fb session token is stored on the users device before authenticating 
-	let token = await AsyncStorage.getItem('fb_token');
+	// first checking if a fb session token is stored on the users device before authenticating
+	try {
+		let token = await AsyncStorage.getItem('fb_token');
 
-	if (token) {
-		return dispatch({ type: FACEBOOK_LOGIN_SUCCESS, payload: token });
-	} else {
-		performFbLogin(dispatch);
+		if (token) {
+			return dispatch({ type: FACEBOOK_LOGIN_SUCCESS, payload: token });
+		} else {
+			performFbLogin(dispatch);
+		}
+	} catch(err) {
+		console.log(err);
 	}
 }
 
