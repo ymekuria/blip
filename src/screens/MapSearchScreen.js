@@ -32,6 +32,12 @@ class MapSearchScreen extends Component {
   ); 
 
   }
+
+  // TODO: create action creator to fetch search results when button is pressed
+  onButtonPress = () => {
+
+  }
+
   render() {
     console.log(`this.state in render method: `, this.state);
     return (
@@ -41,12 +47,26 @@ class MapSearchScreen extends Component {
           style={{ flex: 1 }}
           initialRegion={this.state.region}
         />
-        <Button 
-          title="Search This Area"
-          backgroundColor="#009688"
-        />
+
+        <View style={styles.buttonContainer}>
+          <Button 
+            title="Search This Area"
+            backgroundColor="#009688"
+            icon={{ name: 'search'}}
+            onPress={this.onButtonPress}
+          />
+        </View>
       </View>
-    );
+    ); 
+  }
+}
+
+const styles = {
+  buttonContainer: {
+    position: 'absolute',
+    right: 0,
+    left: 0,
+    bottom: 20    
   }
 }
 
