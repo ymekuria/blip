@@ -33,6 +33,12 @@ class MapSearchScreen extends Component {
 
   }
 
+  // called with a new region object everytime a user completes a gesture on the map
+  onRegionChangeComplete = (region) => {
+    this.setState({ region });
+    console.log('state:', this.state);
+  }
+
   // TODO: create action creator to fetch search results when button is pressed
   onButtonPress = () => {
 
@@ -46,6 +52,7 @@ class MapSearchScreen extends Component {
         <MapView
           style={{ flex: 1 }}
           initialRegion={this.state.region}
+          onRegionChangeComplete={this.onRegionChangeComplete}
         />
 
         <View style={styles.buttonContainer}>
