@@ -16,8 +16,11 @@ class MapSearchScreen extends Component {
       longitudeDelta: 0.1,
     }
   }
+
+  componentWillMount() {
+    this.props.fetchEvents();
+  }
   componentDidMount() {
-    console.log('in compmount')
     // getting the current location of the device to show initial map region
     navigator.geolocation.getCurrentPosition(position => {
       const region = {
@@ -26,9 +29,7 @@ class MapSearchScreen extends Component {
         latitudeDelta: .05,
         longitudeDelta: .1
       };
-      console.log('current position: ', region);
       this.setState({ region });
-      console.log('state after lookup: ',this.state);
     },
     (error) => console.log(error),
     { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 },
@@ -39,7 +40,6 @@ class MapSearchScreen extends Component {
   // called with a new region object everytime a user completes a gesture on the map
   onRegionChangeComplete = (region) => {
     this.setState({ region });
-    console.log('state:', this.state);
   }
 
   // TODO: create action creator to fetch search results when button is pressed
@@ -48,7 +48,6 @@ class MapSearchScreen extends Component {
   }
 
   render() {
-    console.log(`this.state in render method: `, this.state);
     return (
       <View style={{ flex: 1 }}>
 
@@ -80,5 +79,5 @@ const styles = {
   }
 }
 
-export default MapSearchScreen;
+export default connect(null, actions)(MapSearchScreen);
 

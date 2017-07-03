@@ -5,7 +5,6 @@ const SCREEN_WIDTH = Dimensions.get('window').width;
 
 class WelcomeSlides extends Component {
   renderSlides() {
-    console.log(this.props)
     return this.props.slideData.map(slide => {
       return (
         <View
