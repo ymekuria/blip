@@ -11,29 +11,31 @@ class DeckResultsScreen extends Component {
   }
 
   renderCard(event) {
+    const { displayName, venue, location } = event;
     const initialRegion = { 
-      latitude: event.location.lat, 
-      longitude: event.location.lng,
+      latitude: location.lat, 
+      longitude: location.lng,
       latitudeDelta: .045,
       longitudeDelta: .02
     }
 
+
     return (
-      <Card title={event.displayName}>
+      <Card title={displayName}>
         <View style={{ height: 300 }}>
           <MapView
             scrollEnabled={false}
             style={{ flex: 1 }}
             initialRegion={initialRegion}
           >
+          <MapView.Marker
+            coordinate={{latitude: location.lat, longitude: location.lng }}
+          />
           </MapView>
         </View>
-        <View>
-        <Button
-          title="Buy Tickets"
-          backgroundColor="#009688"
-          onPress={() => Linking.openURL(event.uri)}
-        />          
+        <View style={styles.detailWrapper}>
+          <Text>{venue.displayName}</Text>
+          <Text>{location.city.split(',')[0]}</Text>       
         </View>
       </Card>
     );
@@ -55,6 +57,14 @@ class DeckResultsScreen extends Component {
 
 function mapStateToProps({ events }) {
   return { events }
+}
+
+const styles = {
+  detailWrapper: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    marginBottom: 10
+  }
 }
 
 export default connect(mapStateToProps)(DeckResultsScreen);
