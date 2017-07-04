@@ -10,8 +10,7 @@ class DeckResultsScreen extends Component {
     console.log('props: ', this.props.events);
   }
 
-  renderCard(event) {
-    const { displayName, venue, location } = event;
+  renderCard({ displayName, venue, location }) {
     const initialRegion = { 
       latitude: location.lat, 
       longitude: location.lng,
@@ -40,6 +39,10 @@ class DeckResultsScreen extends Component {
       </Card>
     );
 
+  }
+
+  onSwipeRight = (event) => {
+    this.props.saveEvent(event);
   } 
 
   render() {
@@ -49,6 +52,7 @@ class DeckResultsScreen extends Component {
           cardData={this.props.events} 
           renderCard={this.renderCard}
           renderNoMoreCards={this.renderNoMoreCards}
+          onSwipeRight=
         /> 
       </View>
     );  

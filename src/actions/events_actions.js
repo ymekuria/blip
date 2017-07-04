@@ -2,7 +2,7 @@ import axios from 'axios';
 import qs from 'qs';
 import moment from 'moment';
 import { SONGKICK_API_KEY } from '../../env/config';
-import { FETCH_EVENTS } from './types';
+import { FETCH_EVENTS, SAVE_EVENT } from './types';
 
 
 const ROOT_URL = 'http://api.songkick.com/api/3.0/events.json?';
@@ -24,4 +24,8 @@ export const fetchEvents = (location, callBack) => async (dispatch) => {
 	
 	dispatch({ type: FETCH_EVENTS , payload: events });
 	callBack();
+}
+
+export const saveEvent(event) => {
+	return { type: SAVE_EVENT, payload: event }
 }
