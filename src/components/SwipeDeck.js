@@ -13,10 +13,11 @@ const SCREEN_HEIGHT = Dimensions.get('window').height;
 const SWIPE_THRESHOLD = .25 * SCREEN_WIDTH;
 const SWIPE_OUT_DURATION = 250;
 
-class Deck extends Component {
+class SwipeDeck extends Component {
   static defaultProps = {
     onSwipeRight: () => {},
-    onSwipeLeft: () => {}
+    onSwipeLeft: () => {},
+    keyProp: 'id'
   }
 
   constructor(props) {
@@ -26,7 +27,6 @@ class Deck extends Component {
     const panResponder = PanResponder.create({
       onStartShouldSetPanResponder: () => true,
       onPanResponderMove: (event, gesture) => {
-        console.log('event: ', event)
         position.setValue({ x: gesture.dx, y: gesture.dy })
       },
       onPanResponderRelease: (event, gesture) => {
@@ -111,6 +111,7 @@ class Deck extends Component {
     }
 
     return cardData.map((item, index) => {
+      console.log('item in map: ',item);
       // cards that are swiped are no longer rendered
       if (index < topCardIndex) { return null; }
 
@@ -118,7 +119,7 @@ class Deck extends Component {
       if (index === topCardIndex) {
         return (
           <Animated.View 
-            key={item.id}
+            key={item[this.props.keyProp]}
             style={[this.getCardStyle(), styles.cardStyle, { zIndex: 99 }]}
             {...panResponder.panHandlers}
           >
@@ -156,4 +157,4 @@ const styles = {
 };
 
 
-export default Deck;
+export default SwipeDeck;
