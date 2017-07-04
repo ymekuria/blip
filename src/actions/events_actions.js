@@ -2,6 +2,7 @@ import axios from 'axios';
 import qs from 'qs';
 import moment from 'moment';
 import { SONGKICK_API_KEY } from '../../env/config';
+import { FETCH_EVENTS } from './types';
 
 
 const ROOT_URL = 'http://api.songkick.com/api/3.0/events.json?';
@@ -21,5 +22,5 @@ export const fetchEvents = (location) => async (dispatch) => {
 	const url = buildUrl(location);
 	let { data: { resultsPage: { results: {event: events } } } } = await axios.get(url);
 	
-	dispatch { type: FETCH_EVENTS , payload: events }
+	dispatch({ type: FETCH_EVENTS , payload: events });
 }
