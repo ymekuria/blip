@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text } from 'react-native';
 import { connect } from 'react-redux';
+import Deck from '../components/Deck';
 
 class DeckResultsScreen extends Component {
   componentDidMount() {
