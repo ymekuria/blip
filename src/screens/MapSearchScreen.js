@@ -18,7 +18,6 @@ class MapSearchScreen extends Component {
   }
 
   componentWillMount() {
-    this.props.fetchEvents();
   }
   componentDidMount() {
     // getting the current location of the device to show initial map region
@@ -44,7 +43,8 @@ class MapSearchScreen extends Component {
 
   // TODO: create action creator to fetch search results when button is pressed
   onButtonPress = () => {
-
+    const location = this.state.region;
+    this.props.fetchEvents(location);
   }
 
   render() {

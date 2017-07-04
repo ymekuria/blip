@@ -6,11 +6,11 @@ import { SONGKICK_API_KEY } from '../../env/config';
 
 const ROOT_URL = 'http://api.songkick.com/api/3.0/events.json?';
 
-const buildUrl = ({ lattitude, longitude }) => {
+const buildUrl = ({ latitude, longitude }) => {
 	const currentDate = moment().format('YYYY-MM-DD');
 	const eventsQueryParams = {
 		apikey: SONGKICK_API_KEY,
-		location: `geo:${lattitude},${longitude}`,
+		location: `geo:${latitude},${longitude}`,
 		min_date: currentDate,
 		max_date: currentDate
 	}
@@ -18,7 +18,8 @@ const buildUrl = ({ lattitude, longitude }) => {
 }
 
 export const fetchEvents = (location) => async (dispatch) => {
-	const url = buildUrl(lcation);
+	const url = buildUrl(location);
 	let { data: { resultsPage: { results: {event: events } } } } = await axios.get(url);
-	console.log('events', events);
+	
+	dispatch { type: FETCH_EVENTS , payload: events }
 }
