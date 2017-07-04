@@ -10,8 +10,8 @@ class MapSearchScreen extends Component {
   // setting initial map region to San Francisco
   state = {
     region: {
-      latitude: 37.3861,
-      longitude: -122.0839,
+      latitude: 37.7749,
+      longitude: -122.4194,
       latitudeDelta: 0.05,
       longitudeDelta: 0.1,
     }

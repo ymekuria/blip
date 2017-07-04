@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, Linking } from 'react-native';
 import { connect } from 'react-redux';
 import { Card, Button } from 'react-native-elements';
+import { MapView } from 'expo';
 import SwipeDeck from '../components/SwipeDeck';
 
 class DeckResultsScreen extends Component {
@@ -10,10 +11,22 @@ class DeckResultsScreen extends Component {
   }
 
   renderCard(event) {
+    const initialRegion = { 
+      latitude: event.location.lat, 
+      longitude: event.location.lng,
+      latitudeDelta: .045,
+      longitudeDelta: .02
+    }
+
     return (
       <Card title={event.displayName}>
-        <View>
-          <Text>{event.displayName}</Text>
+        <View style={{ height: 300 }}>
+          <MapView
+            scrollEnabled={false}
+            style={{ flex: 1 }}
+            initialRegion={initialRegion}
+          >
+          </MapView>
         </View>
         <View>
         <Button
