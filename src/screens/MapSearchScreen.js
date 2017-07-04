@@ -17,8 +17,6 @@ class MapSearchScreen extends Component {
     }
   }
 
-  componentWillMount() {
-  }
   componentDidMount() {
     // getting the current location of the device to show initial map region
     navigator.geolocation.getCurrentPosition(position => {
@@ -41,10 +39,10 @@ class MapSearchScreen extends Component {
     this.setState({ region });
   }
 
-  // TODO: create action creator to fetch search results when button is pressed
   onButtonPress = () => {
     const location = this.state.region;
-    this.props.fetchEvents(location);
+    // passing a callback that has access to navigation for navigating after api call
+    this.props.fetchEvents(location, () => this.props.navigation.navigate('searchResults'));
   }
 
   render() {

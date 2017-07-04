@@ -18,9 +18,10 @@ const buildUrl = ({ latitude, longitude }) => {
 	return `${ROOT_URL}${qs.stringify(eventsQueryParams, { encode: false })}`;
 }
 
-export const fetchEvents = (location) => async (dispatch) => {
+export const fetchEvents = (location, callBack) => async (dispatch) => {
 	const url = buildUrl(location);
 	let { data: { resultsPage: { results: {event: events } } } } = await axios.get(url);
 	
 	dispatch({ type: FETCH_EVENTS , payload: events });
+	callBack();
 }

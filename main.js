@@ -26,7 +26,8 @@ class App extends Component {
       tabBarPosition: 'bottom',
       tabBarOptions: {
         fontSize: 12
-      }
+      },
+      lazy: true
     }
 
     const appNavigation = TabNavigator({
