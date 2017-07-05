@@ -111,7 +111,8 @@ class SwipeDeck extends Component {
     }
 
     return cardData.map((item, index) => {
-      // fix when lat lng is not available
+      // TODO: use a reverse geocode lookup on city when lat, lng isn't given instead of below
+      // this prevents app from crashing when lat lng is not provided
       if (!item.location.lat) { return null; }
       // cards that are swiped are no longer rendered
       if (index < topCardIndex) { return null; }
