@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, ScrollView,Linking } from 'react-native';
+import { View, Text, ScrollView, Platform } from 'react-native';
 import { connect } from 'react-redux';
 import { MapView } from 'expo';
 import { Card } from 'react-native-elements';
@@ -22,7 +22,7 @@ class DeckResultsScreen extends Component {
             scrollEnabled={false}
             style={{ flex: 1 }}
             initialRegion={initialRegion}
-            cacheEnabled
+            cacheEnabled={Platform.OS === 'android'}
           >
           <MapView.Marker
             coordinate={{ latitude: location.lat, longitude: location.lng }}

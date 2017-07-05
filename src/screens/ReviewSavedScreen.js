@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, ScrollView, Linking } from 'react-native';
+import { View, Text, ScrollView, Linking, Platform } from 'react-native';
 import { connect } from 'react-redux';
 import { MapView } from 'expo';
 import { Card, Button } from 'react-native-elements';
@@ -8,6 +8,7 @@ class ReviewSavedScreen extends Component {
   renderSavedEvents() {
 
     return this.props.savedEvents.map(event => {
+      console.log('event', event)
       const { displaName, location, venue, id } = event;
       const initialRegion = { 
         latitude: location.lat, 
@@ -37,6 +38,7 @@ class ReviewSavedScreen extends Component {
             <Button
               title="Buy Tickets"
               backgroundColor="#03A9F4"
+              onPress={() => Linking.openURL(event.uri)}
             />
           </Card>
         );
