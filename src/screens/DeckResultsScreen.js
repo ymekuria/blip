@@ -6,35 +6,24 @@ import { MapView } from 'expo';
 import SwipeDeck from '../components/SwipeDeck';
 
 class DeckResultsScreen extends Component {
-  componentDidMount() {
-    console.log('props: ', this.props.events);
-  }
-
-  renderCard({ displayName, venue, location }) {
+  renderCard(event) {
     const initialRegion = { 
-      latitude: location.lat, 
-      longitude: location.lng,
+      latitude: event.location.lat, 
+      longitude: event.location.lng,
       latitudeDelta: .045,
       longitudeDelta: .02
     }
-
+    console.log('event ', event);
+    console.log('initialRegion: ', initialRegion );
 
     return (
-      <Card title={displayName}>
+      <Card title={event.displayName}>
         <View style={{ height: 300 }}>
-          <MapView
-            scrollEnabled={false}
-            style={{ flex: 1 }}
-            initialRegion={initialRegion}
-          >
-          <MapView.Marker
-            coordinate={{latitude: location.lat, longitude: location.lng }}
-          />
-          </MapView>
+
         </View>
         <View style={styles.detailWrapper}>
-          <Text>{venue.displayName}</Text>
-          <Text>{location.city.split(',')[0]}</Text>       
+          <Text>{event.venue.displayName}</Text>
+          <Text>{event.location.city.split(',')[0]}</Text>       
         </View>
       </Card>
     );
@@ -42,7 +31,7 @@ class DeckResultsScreen extends Component {
   }
 
   onSwipeRight = (event) => {
-    this.props.saveEvent(event);
+    this.props.saveEvent(event)
   } 
 
   render() {
@@ -52,7 +41,7 @@ class DeckResultsScreen extends Component {
           cardData={this.props.events} 
           renderCard={this.renderCard}
           renderNoMoreCards={this.renderNoMoreCards}
-          onSwipeRight=
+          onSwipeRight={this.onSwipeRight}
         /> 
       </View>
     );  

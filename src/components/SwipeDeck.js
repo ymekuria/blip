@@ -111,7 +111,8 @@ class SwipeDeck extends Component {
     }
 
     return cardData.map((item, index) => {
-      console.log('item in map: ',item);
+      // fix when lat lng is not available
+      if (!item.location.lat) { return null; }
       // cards that are swiped are no longer rendered
       if (index < topCardIndex) { return null; }
 

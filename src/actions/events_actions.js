@@ -26,6 +26,6 @@ export const fetchEvents = (location, callBack) => async (dispatch) => {
 	callBack();
 }
 
-export const saveEvent(event) => {
+export const saveEvent = (event) => {
 	return { type: SAVE_EVENT, payload: event }
 }

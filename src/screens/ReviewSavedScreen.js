@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import { View, Text } from 'react-native';
-
+import { connect } from 'react-redux';
 class ReviewSavedScreen extends Component {
+  componentWillMount() {
+    console.log('saved Props:', this.props);
+  }
   render() {
     return (
       <View> 
@@ -14,5 +17,8 @@ class ReviewSavedScreen extends Component {
   }
 }
 
-export default ReviewSavedScreen;
+function mapStateToProps({ savedEvents }) {
+  return { savedEvents }
+}
+export default connect(mapStateToProps)(ReviewSavedScreen);
 
