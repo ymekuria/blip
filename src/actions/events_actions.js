@@ -20,6 +20,7 @@ const buildUrl = ({ latitude, longitude }) => {
 
 export const fetchEvents = (location, callBack) => async (dispatch) => {
 	const url = buildUrl(location);
+	console.log('url ', url);
 	let { data: { resultsPage: { results: {event: events } } } } = await axios.get(url);
 	
 	dispatch({ type: FETCH_EVENTS , payload: events });

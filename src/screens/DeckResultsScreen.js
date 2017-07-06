@@ -45,14 +45,14 @@ class DeckResultsScreen extends Component {
   render() {
     console.log('this' )
     return (
-      <ScrollView> 
+      <View> 
         <SwipeDeck 
           cardData={this.props.events} 
           renderCard={this.renderCard}
           renderNoMoreCards={this.renderNoMoreCards}
           onSwipeRight={this.onSwipeRight}
         /> 
-      </ScrollView>
+      </View>
     );  
   }
 }

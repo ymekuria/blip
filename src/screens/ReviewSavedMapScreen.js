@@ -4,17 +4,34 @@ import { connect } from 'react-redux';
 import { MapView } from 'expo';
 
 class ReviewSavedMapScreen extends Component {
+	componentWillMount() {
+		console.log('this.props ', this.props)
+	}
 	createMarkers() {
 		return this.props.savedEvents.map(event => (
 			<MapView.Marker
-				coordinates={{ latitude: event.location.lat, longitude: event.location.lng }}
+				key={event.id}
+				coordinate={{ latitude: event.location.lat, longitude: event.location.lng }}
 			/>
 		))
 	}
 	render() {
+		const { location } = this.props.savedEvents[0]
+    const initialRegion = { 
+      latitude: location.lat, 
+      longitude: location.lng,
+      latitudeDelta: 1.2,
+      longitudeDelta: .5
+    };
+		
 		return (
 			<View style={{ flex: 1 }}>
-				
+				<MapView
+					style={{ flex: 1 }}
+					initialRegion={initialRegion}
+				>	
+					{this.createMarkers()}
+				</MapView>
 			</View>		
 		);	
 	}
@@ -24,4 +41,4 @@ function mapStateToProps({ savedEvents }) {
 	return { savedEvents }
 }
 
-export default ReviewSavedMapScreen
+export default connect(mapStateToProps)(ReviewSavedMapScreen)

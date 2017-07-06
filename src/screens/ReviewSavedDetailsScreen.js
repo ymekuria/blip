@@ -56,9 +56,9 @@ class ReviewSavedScreen extends Component {
 
   render() {
    return (
-      <View style={{ flex: 1 }}> 
+      <ScrollView> 
         {this.renderSavedEvents()}     
-      </View>
+      </ScrollView>
     );  
   }
 }
