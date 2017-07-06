@@ -7,9 +7,17 @@ class ReviewSavedMapScreen extends Component {
 	render() {
 		return (
 			<View>
+				<Text>ReviewMapScreen</Text>
+				<Text>ReviewMapScreen</Text>
+				<Text>ReviewMapScreen</Text>
+				<Text>ReviewMapScreen</Text>
 			</View>		
 		);	
 	}
+}
+
+function mapStateToProps({ savedEvents }) {
+	return { savedEvents }
 }
 
 export default ReviewSavedMapScreen

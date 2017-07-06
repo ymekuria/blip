@@ -9,7 +9,8 @@ import WelcomeScreen from './src/screens/WelcomeScreen';
 import AuthScreen from './src/screens/AuthScreen';
 import DeckResultsScreen from './src/screens/DeckResultsScreen';
 import MapSearchScreen from './src/screens/MapSearchScreen';
-import ReviewSavedScreen from './src/screens/ReviewSavedScreen';
+import ReviewSavedDetailsScreen from './src/screens/ReviewSavedDetailsScreen';
+import ReviewSavedMapScreen from './src/screens/ReviewSavedMapScreen';
 import SettingsScreen from './src/screens/SettingsScreen';
 
 class App extends Component {
@@ -35,10 +36,11 @@ class App extends Component {
       searchResults: { screen: DeckResultsScreen },
       review: { 
         screen: StackNavigator({
-          review: { screen: ReviewSavedScreen },
-          settings: { screen: SettingsScreen }
+          review: { screen: ReviewSavedDetailsScreen },
+          savedMap: { screen: ReviewSavedMapScreen }
         })
-      }
+      },
+      settings: { screen: SettingsScreen}
     }, appNavOptions);
 
     const MainNavigation = TabNavigator({
