@@ -1,16 +1,20 @@
 import React, { Component } from 'react';
-import { View } from 'react-native';
+import { View, Text } from 'react-native';
 import { connect } from 'react-redux';
 import { MapView } from 'expo';
 
 class ReviewSavedMapScreen extends Component {
+	createMarkers() {
+		return this.props.savedEvents.map(event => (
+			<MapView.Marker
+				coordinates={{ latitude: event.location.lat, longitude: event.location.lng }}
+			/>
+		))
+	}
 	render() {
 		return (
-			<View>
-				<Text>ReviewMapScreen</Text>
-				<Text>ReviewMapScreen</Text>
-				<Text>ReviewMapScreen</Text>
-				<Text>ReviewMapScreen</Text>
+			<View style={{ flex: 1 }}>
+				
 			</View>		
 		);	
 	}

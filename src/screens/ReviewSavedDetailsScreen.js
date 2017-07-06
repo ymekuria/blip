@@ -5,6 +5,17 @@ import { MapView } from 'expo';
 import { Card, Button } from 'react-native-elements';
 
 class ReviewSavedScreen extends Component {
+  static navigationOptions = ({ navigation }) => ({
+    headerRight: (
+      <Button
+        title='View Map' 
+        onPress={()=> navigation.navigate('savedMap')}
+        backgroundColor="rgba(0,0,0,0)"
+        color="rgba(0, 122, 255, 1)"
+      />  
+    )      
+  });
+
   renderSavedEvents() {
     return this.props.savedEvents.map(event => {
       const { displaName, location, venue, id } = event;
