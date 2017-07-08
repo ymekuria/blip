@@ -97,7 +97,7 @@ class SwipeDeck extends Component {
 
   renderCards() {
     const { topCardIndex, panResponder } = this.state;
-    const { cardData, renderCard, renderNoMoreCards } = this.props;  
+    const { cardData, renderCard, renderNoMoreCards } = this.props; 
 
     // const color = this.state.position.x.interpolate({
     //   inputRange: [-SCREEN_WIDTH * 2.0, 0, SCREEN_WIDTH * 2.0],
@@ -109,7 +109,8 @@ class SwipeDeck extends Component {
       return renderNoMoreCards();
     }
 
-    return cardData.slice(0,15).map((item, index) => {
+    
+    return cardData.map((item, index) => {
       // TODO: use a reverse geocode lookup on city when lat, lng isn't given instead of below
       // this prevents app from crashing when lat lng is not provided
       if (!item.location.lat) { return null; }
