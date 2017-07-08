@@ -13,6 +13,7 @@ class DeckEvent extends component {
       latitudeDelta: .045,
       longitudeDelta: .02
     }		
+    
 		return (
       <Card title={displayName}>
         <View style={{ height: 300 }}>

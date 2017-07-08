@@ -3,7 +3,9 @@ import { View, Text, ScrollView, Platform } from 'react-native';
 import { connect } from 'react-redux';
 import { MapView } from 'expo';
 import { Card } from 'react-native-elements';
+
 import SwipeDeck from '../components/SwipeDeck';
+import DeckEvent from '../compomemts/DeckEvent';
 import * as actions from '../actions';
 
 class DeckResultsScreen extends Component {
