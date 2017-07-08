@@ -7,33 +7,9 @@ import SwipeDeck from '../components/SwipeDeck';
 import * as actions from '../actions';
 
 class DeckResultsScreen extends Component {
-  renderCard({ location, displayName, venue }) {
-    const initialRegion = { 
-      latitude: location.lat, 
-      longitude: location.lng,
-      latitudeDelta: .045,
-      longitudeDelta: .02
-    }
-
+  renderCard(event) {
     return (
-      <Card title={displayName}>
-        <View style={{ height: 300 }}>
-          <MapView
-            scrollEnabled={false}
-            style={{ flex: 1 }}
-            initialRegion={initialRegion}
-            cacheEnabled={Platform.OS === 'android'}
-          >
-          <MapView.Marker
-            coordinate={{ latitude: location.lat, longitude: location.lng }}
-          />
-          </MapView>
-        </View>
-        <View style={styles.detailWrapper}>
-          <Text>{venue.displayName}</Text>
-          <Text>{location.city.split(',')[0]}</Text>       
-        </View>
-      </Card>
+      <DeckEvent event={event} />
     );
 
   }
@@ -43,7 +19,6 @@ class DeckResultsScreen extends Component {
   } 
 
   render() {
-    console.log('this' )
     return (
       <View> 
         <SwipeDeck 
@@ -59,14 +34,6 @@ class DeckResultsScreen extends Component {
 
 function mapStateToProps({ events }) {
   return { events }
-}
-
-const styles = {
-  detailWrapper: {
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    marginBottom: 10
-  }
 }
 
 export default connect(mapStateToProps, actions)(DeckResultsScreen);
