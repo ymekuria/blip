@@ -125,7 +125,7 @@ class SwipeDeck extends Component {
             style={[this.getCardStyle(), styles.cardStyle, { zIndex: 99 }]}
             {...panResponder.panHandlers}
           >
-            {renderCard(item)}
+            {renderCard(item, true)}
           </Animated.View>
         );
       }
@@ -135,7 +135,7 @@ class SwipeDeck extends Component {
           key={item.id}
           style={[styles.cardStyle, { top: 10 * (index - topCardIndex), zIndex: -index }]}
         >
-          {renderCard(item)}
+          {renderCard(item, false)}
         </Animated.View>  
       );  
     }).reverse();
