@@ -1,8 +1,13 @@
 import React, { Component } from 'react';
-import { View, Text, ScrollView, Linking, Platform } from 'react-native';
 import { connect } from 'react-redux';
 import { MapView } from 'expo';
 import { Card, Button } from 'react-native-elements';
+import { View, 
+  Text, 
+  ScrollView, 
+  Linking, 
+  Platform 
+} from 'react-native';
 
 class ReviewSavedScreen extends Component {
   static navigationOptions = ({ navigation }) => ({
@@ -31,7 +36,6 @@ class ReviewSavedScreen extends Component {
           <View style={{ height: 200 }}>
             <MapView
               scrollEnabled={false}
-              cacheEnabled={Platform.OS === 'android'}
               style={{ flex: 1 }}
               initialRegion={initialRegion}
             >

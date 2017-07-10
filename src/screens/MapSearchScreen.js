@@ -48,7 +48,6 @@ class MapSearchScreen extends Component {
   render() {
     return (
       <View style={{ flex: 1 }}>
-
         <MapView
           style={{ flex: 1 }}
           initialRegion={this.state.region}

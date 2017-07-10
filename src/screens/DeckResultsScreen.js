@@ -13,7 +13,6 @@ class DeckResultsScreen extends Component {
     return (
       <DeckEvent event={event} topCard={topCard} />
     );
-
   }
 
   onSwipeRight = (event) => {
