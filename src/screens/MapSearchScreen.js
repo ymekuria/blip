@@ -10,7 +10,7 @@ class MapSearchScreen extends Component {
   static navigationOptions = {
     title: 'Search',
     tabBarIcon: ({ tintColor }) => {
-        return <Icon name="description" color={tintColor} size={30} />
+        return <Icon name="my-location" color={tintColor} size={30} />
     }
   }  
   // setting initial map region to San Francisco
