@@ -19,8 +19,18 @@ class DeckEvent extends Component {
   		return (
         <Card title={displayName.split('at')[0]}>
           <View style={styles.detailWrapper}>
-            <Icon name='location-on' />
-            <Text>{`${venue.displayName} ${moment(start.time, 'HH:mm').format('h:mm a')}`}</Text>
+            <Icon 
+              name='location-on' 
+              color='#009688'  
+            />
+            <View style={styles.venueDetail}>
+              <Text>{venue.displayName}</Text>
+              <Icon
+                name='schedule'
+                color='#009688'
+              />    
+              <Text>{`Doors: ${moment(start.time, 'HH:mm').format('h:mm a')}`}</Text>
+            </View>
             <Text>{location.city.split(',')[0]}</Text>       
           </View>
           <View style={{ height: 200 }}>
@@ -57,8 +67,12 @@ class DeckEvent extends Component {
 const styles = {
   detailWrapper: {
     flexDirection: 'row',
-    justifyContent: 'space-around',
+    justifyContent: 'space-between',
     marginBottom: 10
+  },
+  venueDetail: {
+    flexDirection: 'column',
+
   }
 }
 

@@ -8,6 +8,7 @@ class ReviewSavedMapScreen extends Component {
 	componentWillMount() {
 		console.log('this.props ', this.props)
 	}
+
 	createMarkers() {
 		return this.props.savedEvents.map(event => (
 			<MapView.Marker
@@ -17,6 +18,7 @@ class ReviewSavedMapScreen extends Component {
 			/>
 		))
 	}
+	
 	render() {
 		const { location } = this.props.savedEvents[0]
     const initialRegion = { 
