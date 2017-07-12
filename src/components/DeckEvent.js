@@ -17,20 +17,23 @@ class DeckEvent extends Component {
     
     if (this.props.topCard) {
   		return (
-        <Card title={displayName.split('at')[0]}>
+        <Card 
+          title={displayName.split('at')[0]}
+          containerStyle={{ borderRadius: 10 }}
+        >
           <View style={styles.detailWrapper}>
             <Icon 
               name='location-on' 
-              color='#009688'  
+              color='#009688'
+              size={20}  
             />
-            <View style={styles.venueDetail}>
-              <Text>{venue.displayName}</Text>
-              <Icon
-                name='schedule'
-                color='#009688'
-              />    
-              <Text>{`Doors: ${moment(start.time, 'HH:mm').format('h:mm a')}`}</Text>
-            </View>
+            <Text>{venue.displayName}</Text>
+            <Icon
+              name='schedule'
+              color='#009688'
+              size={20}
+            />    
+            <Text>{`${moment(start.time, 'HH:mm').format('h:mm a')}`}</Text>
             <Text>{location.city.split(',')[0]}</Text>       
           </View>
           <View style={{ height: 200 }}>
@@ -65,6 +68,10 @@ class DeckEvent extends Component {
 }
 
 const styles = {
+  cardContainerStyle: {
+    borderRadius: 2
+  },
+
   detailWrapper: {
     flexDirection: 'row',
     justifyContent: 'space-between',

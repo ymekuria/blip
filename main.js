@@ -18,7 +18,7 @@ class App extends Component {
     // Lazy option prevents the navigator from rendering all the screens initially
     const mainNavOptions = {
       navigationOptions: {
-        tabBarVisible: true
+        tabBarVisible: false
       },
       lazy: true
     }
