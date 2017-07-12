@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { MapView } from 'expo';
-import { Card, Button } from 'react-native-elements';
+import { Card, Button, Icon } from 'react-native-elements';
 import { View, 
   Text, 
   ScrollView, 
@@ -11,6 +11,10 @@ import { View,
 
 class ReviewSavedScreen extends Component {
   static navigationOptions = ({ navigation }) => ({
+    title: 'Saved Events',
+    tabBarIcon: ({ tintColor }) => {
+        return <Icon name="favorite" color={tintColor} size={30} />
+    },      
     headerRight: (
       <Button
         title='View Map' 
