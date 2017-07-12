@@ -19,23 +19,26 @@ class DeckEvent extends Component {
   		return (
         <Card 
           title={displayName.split('at')[0]}
-          containerStyle={{ borderRadius: 10 }}
+          containerStyle={styles.cardContainerStyle}
         >
           <View style={styles.detailWrapper}>
-            <Icon 
-              name='location-on' 
-              color='#009688'
-              size={20}  
-            />
-            <Text>{venue.displayName}</Text>
-            <Icon
-              name='schedule'
-              color='#009688'
-              size={20}
-            />    
-            <Text>{`${moment(start.time, 'HH:mm').format('h:mm a')}`}</Text>
-            <Text>{location.city.split(',')[0]}</Text>       
-          </View>
+            <View style={styles.iconWrapper}>
+              <Icon 
+                name='location-on' 
+                color='#009688'
+                size={20}  
+              />
+              <Text>{venue.displayName}</Text>
+            </View>
+            <View style={styles.iconWrapper}>
+              <Icon
+                name='schedule'
+                color='#009688'
+                size={20}
+              />    
+              <Text>{`${moment(start.time, 'HH:mm').format('h:mm a')}`}</Text>
+            </View> 
+          </View>       
           <View style={{ height: 200 }}>
             <MapView
               scrollEnabled={false}
@@ -53,7 +56,10 @@ class DeckEvent extends Component {
       );
     } else {
       return (
-        <Card title={displayName.split('at')[0]}>
+        <Card 
+          title={displayName.split('at')[0]}
+          containerStyle={styles.cardContainerStyle}
+        >
           <View style={{ height: 200 }}>
                  
           </View>
@@ -69,7 +75,10 @@ class DeckEvent extends Component {
 
 const styles = {
   cardContainerStyle: {
-    borderRadius: 2
+    borderRadius: 10
+  },
+  iconWrapper: {
+    justifyContent: 'flex-start'
   },
 
   detailWrapper: {
