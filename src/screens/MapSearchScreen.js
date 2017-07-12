@@ -7,6 +7,12 @@ import { Button, Icon, Card } from 'react-native-elements';
 import * as actions from '../actions';
 
 class MapSearchScreen extends Component {
+  static navigationOptions = {
+    title: 'Search',
+    tabBarIcon: ({ tintColor }) => {
+        return <Icon name="description" color={tintColor} size={30} />
+    }
+  }  
   // setting initial map region to San Francisco
   state = {
     region: {

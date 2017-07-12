@@ -18,7 +18,7 @@ class DeckEvent extends Component {
     if (this.props.topCard) {
   		return (
         <Card 
-          title={displayName.split('at')[0]}
+          title={displayName.split('at ')[0]}
           containerStyle={styles.cardContainerStyle}
         >
           <View style={styles.detailWrapper}>
@@ -28,7 +28,10 @@ class DeckEvent extends Component {
                 color='#009688'
                 size={20}  
               />
-              <Text>{venue.displayName}</Text>
+              <View style={{ flexDirection: 'column' }}>
+                <Text style={{ fontWeight: 'bold', fontSize: 10 }}>{venue.displayName}</Text>
+                <Text style={{ fontSize: 6 }}>{location.city.split(',')[0]}</Text>       
+              </View>  
             </View>
             <View style={styles.iconWrapper}>
               <Icon
@@ -36,7 +39,9 @@ class DeckEvent extends Component {
                 color='#009688'
                 size={20}
               />    
-              <Text>{`${moment(start.time, 'HH:mm').format('h:mm a')}`}</Text>
+              <Text
+                style={{ fontSize: 12 }}
+              >{`${moment(start.time, 'HH:mm').format('h:mm a')}`}</Text>
             </View> 
           </View>       
           <View style={{ height: 200 }}>
@@ -60,6 +65,29 @@ class DeckEvent extends Component {
           title={displayName.split('at')[0]}
           containerStyle={styles.cardContainerStyle}
         >
+          <View style={styles.detailWrapper}>
+            <View style={styles.iconWrapper}>
+              <Icon 
+                name='location-on' 
+                color='#009688'
+                size={20}  
+              />
+              <View style={{ flexDirection: 'column' }}>
+                <Text style={{ fontWeight: 'bold', fontSize: 10 }}>{venue.displayName}</Text>
+                <Text style={{ fontSize: 6 }}>{location.city.split(',')[0]}</Text>       
+              </View>  
+            </View>
+            <View style={styles.iconWrapper}>
+              <Icon
+                name='schedule'
+                color='#009688'
+                size={20}
+              />    
+              <Text
+                style={{ fontSize: 12 }}
+              >{`${moment(start.time, 'HH:mm').format('h:mm a')}`}</Text>
+            </View> 
+          </View>        
           <View style={{ height: 200 }}>
                  
           </View>
@@ -78,6 +106,8 @@ const styles = {
     borderRadius: 10
   },
   iconWrapper: {
+    flexDirection: 'row',
+    flex: 1,
     justifyContent: 'flex-start'
   },
 
