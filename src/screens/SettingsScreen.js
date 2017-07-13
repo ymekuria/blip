@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { View, Text } from 'react-native';
 import { Button, Card, Icon  } from 'react-native-elements';
+import { connect } from 'react-redux';
 import * as actions from '../actions';
+
 
 class SettingsScreen extends Component {
 static navigationOptions = {
@@ -11,11 +13,11 @@ static navigationOptions = {
     }
   }
 
-  onButtonPress() {
-    this.props.deleteSavedevents();
-
+  onButtonPress = () => {
+    console.log('this.props: ', this.props);
+    this.props.deleteSavedEvents();
   }    
-  
+
   render() {
     return (
       <View> 

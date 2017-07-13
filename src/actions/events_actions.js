@@ -32,5 +32,5 @@ export const saveEvent = (event) => {
 }
 
 export const deleteSavedEvents = () => {
-	return { type: DELETE_SAVED_EVENTS}
+	return { type: DELETE_SAVED_EVENTS }
 }
