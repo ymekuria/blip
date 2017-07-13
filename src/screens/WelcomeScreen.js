@@ -6,6 +6,8 @@ import {
 	Dimensions,
 	AsyncStorage 
 } from 'react-native';
+import { AppLoading } from 'expo';
+
 import WelcomeSlides from '../components/WelcomeSlides';
 import { connect } from 'react-redux';
 import * as actions from '../actions'; 
@@ -18,21 +20,28 @@ const slideData = [
 ];
 
 class WelcomeScreen extends Component {
+	state = {
+		mapLoaded: false
+	}
 	// only rendering the welcome screen flow for first time users.
 	async componentWillMount() {
 		let token = await AsyncStorage.getItem('fb_token'); 
 
+		this.setState({ mapLoaded: true });
+
 		if (token) {
 			this.props.navigation.navigate('mapSearch');
 		}
-
 	}
 
   render() {
-  	console.log('state', this.state);
-    return (
-      <WelcomeSlides slideData={slideData}/>
-    );  
+  	if (!this.state.mapLoaded) {
+  		return <AppLoading />
+  	} else {
+	    return (
+	      <WelcomeSlides slideData={slideData}/>
+	    );  
+	  }  
   }
 }
 
