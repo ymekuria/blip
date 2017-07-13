@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text } from 'react-native';
-import { Icon } from 'react-native-elements';
+import { Button, Card, Icon  } from 'react-native-elements';
 
 class SettingsScreen extends Component {
 static navigationOptions = {
@@ -12,10 +12,11 @@ static navigationOptions = {
   render() {
     return (
       <View> 
-        <Text>SettingsScreen</Text>
-        <Text>SettingsScreen</Text>
-        <Text>SettingsScreen</Text>
-        <Text>SettingsScreen</Text> 
+        <Card>
+          <Button 
+
+          />
+        </Card>
       </View>
     );  
   }

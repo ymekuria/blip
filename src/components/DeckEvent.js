@@ -22,7 +22,6 @@ class DeckEvent extends Component {
           scrollEnabled={false}
           style={{ flex: 1 }}
           initialRegion={initialRegion}
-          cacheEnabled
         >
         <MapView.Marker
           coordinate={{ latitude: location.lat, longitude: location.lng }}
