@@ -6,98 +6,70 @@ import moment from 'moment'
 import { Card, Icon } from 'react-native-elements';
 
 class DeckEvent extends Component {
-	render() {
-		const { displayName, location, venue, start } = this.props.event;
+
+  renderMap() {
+    const { location, venue } = this.props.event;
     const initialRegion = { 
       latitude: location.lat, 
       longitude: location.lng,
       latitudeDelta: .045,
       longitudeDelta: .02
-    }		
-    
+    }
+
     if (this.props.topCard) {
-  		return (
-        <Card 
-          title={displayName.split('at ')[0]}
-          containerStyle={styles.cardContainerStyle}
-        >
-          <View style={styles.detailWrapper}>
-            <View style={styles.iconWrapper}>
-              <Icon 
-                name='location-on' 
-                color='#009688'
-                size={20}  
-              />
-              <View style={{ flexDirection: 'column' }}>
-                <Text style={{ fontWeight: 'bold', fontSize: 10 }}>{venue.displayName}</Text>
-                <Text style={{ fontSize: 6 }}>{location.city.split(',')[0]}</Text>       
-              </View>  
-            </View>
-            <View style={styles.iconWrapper}>
-              <Icon
-                name='schedule'
-                color='#009688'
-                size={20}
-              />    
-              <Text
-                style={{ fontSize: 12 }}
-              >{`${moment(start.time, 'HH:mm').format('h:mm a')}`}</Text>
-            </View> 
-          </View>       
-          <View style={{ height: 200 }}>
-            <MapView
-              scrollEnabled={false}
-              style={{ flex: 1 }}
-              initialRegion={initialRegion}
-              cacheEnabled
-            >
-            <MapView.Marker
-              coordinate={{ latitude: location.lat, longitude: location.lng }}
-              description={venue.displayName}
-            />
-            </MapView>          
-          </View>
-        </Card>
-      );
-    } else {
       return (
-        <Card 
-          title={displayName.split('at')[0]}
-          containerStyle={styles.cardContainerStyle}
+        <MapView
+          scrollEnabled={false}
+          style={{ flex: 1 }}
+          initialRegion={initialRegion}
+          cacheEnabled
         >
-          <View style={styles.detailWrapper}>
-            <View style={styles.iconWrapper}>
-              <Icon 
-                name='location-on' 
-                color='#009688'
-                size={20}  
-              />
-              <View style={{ flexDirection: 'column' }}>
-                <Text style={{ fontWeight: 'bold', fontSize: 10 }}>{venue.displayName}</Text>
-                <Text style={{ fontSize: 6 }}>{location.city.split(',')[0]}</Text>       
-              </View>  
-            </View>
-            <View style={styles.iconWrapper}>
-              <Icon
-                name='schedule'
-                color='#009688'
-                size={20}
-              />    
-              <Text
-                style={{ fontSize: 12 }}
-              >{`${moment(start.time, 'HH:mm').format('h:mm a')}`}</Text>
-            </View> 
-          </View>        
-          <View style={{ height: 200 }}>
-                 
+        <MapView.Marker
+          coordinate={{ latitude: location.lat, longitude: location.lng }}
+          description={venue.displayName}
+        />
+        </MapView>     
+      );  
+    }
+  }
+
+  render() {
+    const { displayName, location, venue, start } = this.props.event;
+  		
+    return (
+      <Card 
+        title={displayName.split('at ')[0]}
+        containerStyle={styles.cardContainerStyle}
+      >
+        <View style={styles.detailWrapper}>
+          <View style={styles.iconWrapper}>
+            <Icon 
+              name='location-on' 
+              color='#009688'
+              size={20}  
+            />
+            <View style={{ flexDirection: 'column' }}>
+              <Text style={{ fontWeight: 'bold', fontSize: 10 }}>{venue.displayName}</Text>
+              <Text style={{ fontSize: 6 }}>{location.city.split(',')[0]}</Text>       
+            </View>  
           </View>
-          <View style={styles.detailWrapper}>
-            <Text>{venue.displayName}</Text>
-            <Text>{location.city.split(',')[0]}</Text>       
-          </View>
-        </Card>
-      );      
-    }  
+          <View style={styles.iconWrapper}>
+            <Icon
+              name='schedule'
+              color='#009688'
+              size={20}
+            />    
+            <Text
+              style={{ fontSize: 12 }}
+            >{`${moment(start.time, 'HH:mm').format('h:mm a')}`}</Text>
+          </View> 
+        </View>       
+        <View style={{ height: 200 }}>
+          {this.renderMap()}         
+        </View>
+      </Card>
+    );
+  
 	}
 }
 

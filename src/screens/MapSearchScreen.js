@@ -59,7 +59,6 @@ class MapSearchScreen extends Component {
           initialRegion={this.state.region}
           onRegionChangeComplete={this.onRegionChangeComplete}
         />
-
         <View style={styles.buttonContainer}>
           <Button 
             title="Search This Area"
