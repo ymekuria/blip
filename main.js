@@ -1,7 +1,7 @@
 import Expo from 'expo';
 import React, { Component } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import { TabNavigator, StackNavigator } from 'react-navigation'
+import { TabNavigator, StackNavigator } from 'react-navigation';
 import { Provider } from 'react-redux';
 
 import store from './store';
@@ -21,7 +21,7 @@ class App extends Component {
         tabBarVisible: false
       },
       lazy: true
-    }
+    };
 
     const appNavOptions = {
       tabBarPosition: 'bottom',
@@ -29,31 +29,36 @@ class App extends Component {
         fontSize: 12
       },
       lazy: true
-    }
+    };
 
-    const appNavigation = TabNavigator({
-      mapSearch: { screen: MapSearchScreen},
-      searchResults: { screen: DeckResultsScreen },
-      review: { 
-        screen: StackNavigator({
-          review: { screen: ReviewSavedDetailsScreen },
-          savedMap: { screen: ReviewSavedMapScreen }
-        })
+    const appNavigation = TabNavigator(
+      {
+        mapSearch: { screen: MapSearchScreen },
+        searchResults: { screen: DeckResultsScreen },
+        review: {
+          screen: StackNavigator({
+            review: { screen: ReviewSavedDetailsScreen },
+            savedMap: { screen: ReviewSavedMapScreen }
+          })
+        },
+        settings: { screen: SettingsScreen }
       },
-      settings: { screen: SettingsScreen}
-    }, appNavOptions);
+      appNavOptions
+    );
 
-    const MainNavigation = TabNavigator({
-      welcome: { screen: WelcomeScreen },
-      auth: { screen: AuthScreen },
-      app: { screen: appNavigation }
-    }, mainNavOptions);
-    
+    const MainNavigation = TabNavigator(
+      {
+        welcome: { screen: WelcomeScreen },
+        auth: { screen: AuthScreen },
+        app: { screen: appNavigation }
+      },
+      mainNavOptions
+    );
+
     return (
       <Provider store={store}>
         <MainNavigation />
-      </Provider>  
-     
+      </Provider>
     );
   }
 }
@@ -62,8 +67,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    justifyContent: 'center',
-  },
+    justifyContent: 'center'
+  }
 });
 
 Expo.registerRootComponent(App);

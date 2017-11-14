@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text } from 'react-native';
-import { connect } from 'react-redux'
-import * as actions from '../actions';
+import { connect } from 'react-redux';
+import { facebookLogin } from '../actions';
 
 class AuthScreen extends Component {
   componentDidMount() {
@@ -16,16 +16,12 @@ class AuthScreen extends Component {
   }
 
   render() {
-    return (
-      <View> 
-      </View>
-    );  
+    return <View />;
   }
 }
 
 function mapStateToProps(state) {
-  return { token: state.auth.token }
+  return { token: state.auth.token };
 }
 
-export default  connect(mapStateToProps, actions)(AuthScreen);
-
+export default connect(mapStateToProps, { facebookLogin })(AuthScreen);

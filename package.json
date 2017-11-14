@@ -1,8 +1,8 @@
 {
   "name": "blip",
   "version": "0.0.0",
-  "description": "Hello Expo!",
-  "author": null,
+  "description": "",
+  "author": "Yoni Mekuria",
   "private": true,
   "main": "main.js",
   "dependencies": {
