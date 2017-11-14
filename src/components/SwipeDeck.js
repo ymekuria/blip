@@ -1,16 +1,17 @@
 import React, { Component } from 'react';
-import { View, 
+import {
+  View,
   Text,
   Animated,
   PanResponder,
   Dimensions,
   LayoutAnimation,
   UIManager
-} from 'react-native'; 
+} from 'react-native';
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const SCREEN_HEIGHT = Dimensions.get('window').height;
-const SWIPE_THRESHOLD = .25 * SCREEN_WIDTH;
+const SWIPE_THRESHOLD = 0.25 * SCREEN_WIDTH;
 const SWIPE_OUT_DURATION = 250;
 
 class SwipeDeck extends Component {
@@ -18,7 +19,7 @@ class SwipeDeck extends Component {
     onSwipeRight: () => {},
     onSwipeLeft: () => {},
     keyProp: 'id'
-  }
+  };
 
   constructor(props) {
     super(props);
@@ -27,7 +28,7 @@ class SwipeDeck extends Component {
     const panResponder = PanResponder.create({
       onStartShouldSetPanResponder: () => true,
       onPanResponderMove: (event, gesture) => {
-        position.setValue({ x: gesture.dx, y: gesture.dy })
+        position.setValue({ x: gesture.dx, y: gesture.dy });
       },
       onPanResponderRelease: (event, gesture) => {
         if (gesture.dx > SWIPE_THRESHOLD) {
@@ -39,9 +40,8 @@ class SwipeDeck extends Component {
         } else {
           // reset card to initial position
           this.resetCardPositon();
-        }          
+        }
       }
-
     });
 
     this.state = { panResponder, position, topCardIndex: 0 };
@@ -49,104 +49,102 @@ class SwipeDeck extends Component {
 
   // swipes the card off the screen once a user drags past the threshold
   swipeOffScreen(direction) {
-    // direction argument determines which side of the screen the card animates to 
+    // direction argument determines which side of the screen the card animates to
     const x = direction === 'right' ? SCREEN_WIDTH : -SCREEN_WIDTH;
 
     Animated.timing(this.state.position, {
-      toValue: { x, y: 0},
+      toValue: { x, y: 0 },
       duration: SWIPE_OUT_DURATION
-    }).start(() => this.onSwipeComplete(direction));     
+    }).start(() => this.onSwipeComplete(direction));
   }
 
   // this method is executed after a card is swiped
   onSwipeComplete(direction) {
-   
     // onSwipeRight/onSwipeLeft handlers can be defined and passed down as props to this component
     const { onSwipeLeft, onSwipeRight, cardData } = this.props;
     const item = cardData[this.state.topCardIndex]; // item is set to the card that was swiped
 
     direction === 'right' ? onSwipeRight(item) : onSwipeLeft(item);
-    
+
     // reset the position and increments the topCardIndex
-    this.state.position.setValue({ x: 0, y: 0 }); 
+    this.state.position.setValue({ x: 0, y: 0 });
     this.setState({ topCardIndex: this.state.topCardIndex + 1 });
-  }  
-  
-  // animates card to initial position 
+  }
+
+  // animates card to initial position
   resetCardPositon() {
     Animated.spring(this.state.position, {
-      toValue: { x:0, y:0 }
+      toValue: { x: 0, y: 0 }
     }).start();
   }
 
   getCardStyle() {
     const { position } = this.state;
-    // this maps the animated x position of the card to a rotation degree 
+    // this maps the animated x position of the card to a rotation degree
     // ie at the left edge of screen card will rotate -120deg at 0 rotation is 0
+    // TODO: inotpolate green background color for swipe right and red for left
     const rotate = position.x.interpolate({
       inputRange: [-SCREEN_WIDTH * 2.0, 0, SCREEN_WIDTH * 2.0],
       outputRange: ['-120deg', '0deg', '120deg']
     });
 
-
     return {
       ...position.getLayout(),
       transform: [{ rotate }]
-    }
+    };
   }
 
   renderCards() {
     const { topCardIndex, panResponder } = this.state;
-    const { cardData, renderCard, renderNoMoreCards } = this.props; 
+    const { cardData, renderCard, renderNoMoreCards } = this.props;
 
-    // const color = this.state.position.x.interpolate({
-    //   inputRange: [-SCREEN_WIDTH * 2.0, 0, SCREEN_WIDTH * 2.0],
-    //   outputRange: ['red', 'white', 'green']
-    // });    
-    
-    // shows the user that all the cards have been swiped    
+    // shows the user that all the cards have been swiped
     if (topCardIndex >= cardData.length) {
       return renderNoMoreCards();
     }
 
-    
-    return cardData.map((item, index) => {
-      // TODO: use a reverse geocode lookup on city when lat, lng isn't given instead of below
-      // this prevents app from crashing when lat lng is not provided
-      if (!item.location.lat) { return null; }
-      // cards that are swiped are no longer rendered
-      if (index < topCardIndex) { return null; }
+    return cardData
+      .map((item, index) => {
+        // TODO: use a reverse geocode lookup on city when lat, lng isn't given instead of below
+        // this prevents app from crashing when lat lng is not provided
+        if (!item.location.lat) {
+          return null;
+        }
+        // cards that are swiped are no longer rendered
+        if (index < topCardIndex) {
+          return null;
+        }
 
-      // attaches animations and panResponder handlers to top card of the deck
-      if (index === topCardIndex) {
+        // attaches animations and panResponder handlers to top card of the deck
+        if (index === topCardIndex) {
+          return (
+            <Animated.View
+              key={item[this.props.keyProp]}
+              style={[this.getCardStyle(), styles.cardStyle, { zIndex: 99 }]}
+              {...panResponder.panHandlers}
+            >
+              {renderCard(item, true)}
+            </Animated.View>
+          );
+        }
+        // all other cards are staggered below the top card and are rendered without gesture handlers
         return (
-          <Animated.View 
-            key={item[this.props.keyProp]}
-            style={[this.getCardStyle(), styles.cardStyle, { zIndex: 99 }]}
-            {...panResponder.panHandlers}
+          <Animated.View
+            key={item.id}
+            style={[
+              styles.cardStyle,
+              { top: 10 * (index - topCardIndex), zIndex: -index }
+            ]}
           >
-            {renderCard(item, true)}
+            {renderCard(item, false)}
           </Animated.View>
         );
-      }
-      // all other cards are staggered below the top card and are rendered without gesture handlers  
-      return (
-        <Animated.View
-          key={item.id}
-          style={[styles.cardStyle, { top: 10 * (index - topCardIndex), zIndex: -index }]}
-        >
-          {renderCard(item, false)}
-        </Animated.View>  
-      );  
-    }).reverse();
+      })
+      .reverse();
   }
 
   render() {
-    return(
-      <View>
-        {this.renderCards()}
-      </View>   
-    );
+    return <View>{this.renderCards()}</View>;
   }
 }
 
@@ -157,6 +155,5 @@ const styles = {
     height: SCREEN_HEIGHT
   }
 };
-
 
 export default SwipeDeck;

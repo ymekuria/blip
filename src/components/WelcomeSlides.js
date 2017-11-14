@@ -16,18 +16,13 @@ class WelcomeSlides extends Component {
       );
     });
   }
-  
 
   render() {
     return (
-      <ScrollView
-        horizontal
-        pagingEnabled
-        style={{ flex: 1 }}
-      > 
+      <ScrollView horizontal pagingEnabled style={{ flex: 1 }}>
         {this.renderSlides()}
       </ScrollView>
-    );  
+    );
   }
 }
 
@@ -42,8 +37,7 @@ const styles = {
   textStyle: {
     fontSize: 30,
     textAlign: 'center'
-    
   }
-}
+};
 
 export default WelcomeSlides;
