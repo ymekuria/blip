@@ -4,7 +4,7 @@ import events from './events_reducer';
 import savedEvents from './save_event_reducer';
 
 export default combineReducers({
-  auth, 
+  auth,
   events,
   savedEvents
 });
